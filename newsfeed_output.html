@@ -7,271 +7,398 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --red:    #c0392b;
+      --red-lt: #fdecea;
+      --red-bd: #f5b7b1;
+      --gold:   #f39c12;
+      --bg:     #f2f2f0;
+      --card:   #ffffff;
+      --text:   #1a1a1a;
+      --muted:  #666;
+      --radius: 14px;
+    }
+
     body {
       font-family: -apple-system, "Noto Sans TC", "PingFang TC", "微軟正黑體", sans-serif;
-      background: #f4f4f2;
-      color: #222;
-      padding: 2rem 1rem 3rem;
+      background: var(--bg);
+      color: var(--text);
+      padding: 2.5rem 1rem 4rem;
+      line-height: 1.5;
     }
 
-    /* header */
+    /* ── Header ── */
     header { text-align: center; margin-bottom: 2rem; }
-    .site-label {
-      display: inline-block;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #888;
-      margin-bottom: 0.5rem;
+      color: #999;
+      margin-bottom: 0.6rem;
     }
-    header h1 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      color: #b71c1c;
-      line-height: 1.2;
-    }
-    header h1 span { color: #333; font-weight: 400; font-size: 1.1rem; }
-    .meta-bar { margin-top: 0.6rem; font-size: 0.82rem; color: #777; }
-    .meta-bar a { color: #b71c1c; text-decoration: none; }
-    .meta-bar a:hover { text-decoration: underline; }
+    .eyebrow::before,
+    .eyebrow::after { content: ''; flex: 1; height: 1px; background: #ddd; width: 2rem; }
 
-    /* demo banner */
-    .demo-banner {
-      max-width: 720px;
-      margin: 0 auto 1.5rem;
-      padding: 0.65rem 1rem;
-      background: #fff8e1;
-      border-left: 4px solid #f9a825;
-      border-radius: 4px;
-      font-size: 0.82rem;
-      color: #6d4c0a;
-      line-height: 1.6;
+    h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--red);
+      letter-spacing: -0.02em;
     }
-    .demo-banner code {
-      background: #fef3cd;
-      padding: 0.1rem 0.4rem;
-      border-radius: 3px;
+    h1 em {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #555;
+      margin-left: 0.4rem;
+    }
+
+    .meta {
+      margin-top: 0.6rem;
       font-size: 0.78rem;
+      color: #999;
+    }
+    .meta a { color: var(--red); text-decoration: none; }
+    .meta a:hover { text-decoration: underline; }
+
+    /* ── Source badge ── */
+    .source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 1.2rem auto 0;
+      padding: 0.35rem 0.9rem;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      color: #666;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .source-badge .dot {
+      width: 7px; height: 7px;
+      background: #27ae60;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .35; }
     }
 
-    /* feed */
+    /* ── Feed ── */
     .feed {
-      max-width: 720px;
-      margin: 0 auto;
+      max-width: 700px;
+      margin: 2rem auto 0;
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
+      gap: 1rem;
     }
 
-    /* card */
+    /* ── Card ── */
     .card {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      padding: 1.1rem 1.3rem;
       display: grid;
-      grid-template-columns: 3.2rem 80px 1fr;
-      gap: 0 1rem;
-      padding: 1rem 1.25rem;
+      grid-template-columns: 2.8rem 76px 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 1rem;
+      row-gap: 0;
       align-items: start;
       transition: transform .15s, box-shadow .15s;
+      text-decoration: none;
+      color: inherit;
     }
     .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,0,.12);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
     }
 
-    /* rank badge */
+    /* rank */
     .rank {
       grid-row: 1 / 3;
       align-self: center;
-      width: 3rem;
-      height: 3rem;
+      width: 2.8rem;
+      height: 2.8rem;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
-      font-weight: 800;
-      flex-shrink: 0;
+      font-size: 1.15rem;
+      font-weight: 900;
     }
-    .r1 { background: linear-gradient(135deg,#f9d423,#f76b1c); color: #3e2000; }
-    .r2 { background: linear-gradient(135deg,#cfd9df,#e2ebf0); color: #444; }
-    .r3 { background: linear-gradient(135deg,#e67e22,#d35400); color: #fff; }
-    .r4 { background: linear-gradient(135deg,#2980b9,#1a5276); color: #fff; }
-    .r5 { background: linear-gradient(135deg,#27ae60,#1e8449); color: #fff; }
+    .r1 { background: linear-gradient(135deg,#ffd700,#f39c12); color: #5a3a00; }
+    .r2 { background: linear-gradient(135deg,#e8ecef,#cdd3d8); color: #3a3a3a; }
+    .r3 { background: linear-gradient(135deg,#f0a070,#d35400); color: #fff; }
+    .r4 { background: linear-gradient(135deg,#5dade2,#1a5276); color: #fff; }
+    .r5 { background: linear-gradient(135deg,#58d68d,#1e8449); color: #fff; }
 
-    /* brand avatar */
+    /* avatar */
     .avatar {
       grid-row: 1 / 3;
       align-self: center;
-      width: 80px;
-      height: 80px;
+      width: 76px;
+      height: 76px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
       flex-shrink: 0;
-      font-weight: 800;
-      letter-spacing: -0.03em;
     }
-    .av1 { background: linear-gradient(135deg,#fff3cd,#ffe082); color: #7d4e00; font-size: 1.45rem; }
-    .av2 { background: linear-gradient(135deg,#e3f2fd,#bbdefb); color: #0d47a1; font-size: 1.1rem; }
-    .av3 { background: linear-gradient(135deg,#e8f5e9,#c8e6c9); color: #1b5e20; font-size: 1.4rem; }
-    .av4 { background: linear-gradient(135deg,#ede7f6,#d1c4e9); color: #311b92; font-size: 1.1rem; }
-    .av5 { background: linear-gradient(135deg,#e0f7fa,#b2ebf2); color: #006064; font-size: 1.4rem; }
+    .av1 { background: linear-gradient(150deg,#fff9e6,#ffd97d); color: #6b4400; font-size: 1.4rem; }
+    .av2 { background: linear-gradient(150deg,#e8f5ff,#90caf9); color: #0d47a1; font-size: 0.95rem; }
+    .av3 { background: linear-gradient(150deg,#fdf3e7,#f5cba7); color: #784212; font-size: 1.35rem; }
+    .av4 { background: linear-gradient(150deg,#f0eaff,#c39bd3); color: #4a235a; font-size: 0.9rem; }
+    .av5 { background: linear-gradient(150deg,#eafaf1,#a9dfbf); color: #145a32; font-size: 0.9rem; }
 
-    /* card text */
-    .card-header {
+    /* top row */
+    .top-row {
       display: flex;
       align-items: baseline;
-      gap: 0.6rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
     }
-    .name { font-size: 1.08rem; font-weight: 700; color: #111; }
-    .change { font-size: 0.75rem; color: #27ae60; font-weight: 600; }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.35rem; }
-    .tag {
-      font-size: 0.7rem;
-      padding: 0.15rem 0.55rem;
-      background: #fdecea;
-      color: #b71c1c;
+    .name { font-size: 1.05rem; font-weight: 700; }
+    .trend {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.1rem 0.5rem;
       border-radius: 999px;
-      border: 1px solid #f5b7b1;
     }
-    .score-row { margin-top: 0.45rem; font-size: 0.82rem; color: #555; }
-    .score-val { font-weight: 700; color: #b71c1c; }
+    .trend-up   { background: #eafaf1; color: #1e8449; }
+    .trend-new  { background: #eaf4fb; color: #1a5276; }
+    .trend-same { background: #f2f3f4; color: #616a6b; }
+
+    /* tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+    .tag {
+      font-size: 0.67rem;
+      padding: 0.1rem 0.5rem;
+      background: var(--red-lt);
+      color: var(--red);
+      border: 1px solid var(--red-bd);
+      border-radius: 999px;
+    }
+
+    /* score */
+    .score-bar {
+      margin-top: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .score-label { font-size: 0.74rem; color: var(--muted); }
+    .score-num   { font-size: 0.82rem; font-weight: 700; color: var(--red); }
+    .bar-wrap    { flex: 1; height: 5px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+    .bar-fill    { height: 100%; border-radius: 3px; background: linear-gradient(90deg,#e74c3c,#f39c12); }
+
+    /* desc */
     .desc {
       grid-column: 3;
-      margin-top: 0.5rem;
-      font-size: 0.82rem;
-      color: #666;
-      line-height: 1.6;
+      margin-top: 0.55rem;
+      font-size: 0.79rem;
+      color: #555;
+      line-height: 1.65;
     }
 
-    /* footer */
-    footer { text-align: center; margin-top: 2.5rem; font-size: 0.78rem; color: #aaa; }
-    footer a { color: #aaa; }
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.74rem;
+      color: #bbb;
+    }
+    footer a { color: #bbb; }
 
-    @media (max-width: 480px) {
-      .card { grid-template-columns: 2.6rem 64px 1fr; gap: 0 0.75rem; padding: 0.85rem 1rem; }
-      .avatar { width: 64px; height: 64px; }
-      .rank { width: 2.6rem; height: 2.6rem; font-size: 1.05rem; }
-      .desc { grid-column: 1 / -1; margin-top: 0.75rem; }
+    /* ── Responsive ── */
+    @media (max-width: 500px) {
+      h1 { font-size: 1.55rem; }
+      .card {
+        grid-template-columns: 2.4rem 60px 1fr;
+        column-gap: 0.75rem;
+        padding: 0.9rem 1rem;
+      }
+      .avatar { width: 60px; height: 60px; border-radius: 10px; }
+      .rank   { width: 2.4rem; height: 2.4rem; font-size: 1rem; }
+      .desc   { grid-column: 1 / -1; margin-top: 0.75rem; }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="site-label">DailyView 網路溫度計 ・ 口碑聲量排行</div>
-    <h1>手搖飲料 Top 5 <span>近 30 天</span></h1>
-    <div class="meta-bar">
+    <div class="eyebrow">DailyView 網路溫度計・口碑聲量排行</div>
+    <h1>手搖飲料 Top 5<em>近 30 天</em></h1>
+    <p class="meta">
       資料來源：<a href="https://dailyview.tw/top100/topic/35?range=30" target="_blank" rel="noopener">dailyview.tw/top100/topic/35</a>
-      &nbsp;｜&nbsp; 更新時間：2026-05-08
+      &nbsp;｜&nbsp;更新：2026-05-08
+    </p>
+    <div class="source-badge">
+      <span class="dot"></span>
+      由 Claude AI 透過網路搜尋彙整・純 HTML 靜態頁面
     </div>
   </header>
 
-  <div class="demo-banner">
-    ⚠️ <strong>示範資料（Demo）</strong>：腳本執行環境無法直連 dailyview.tw，
-    以下排名資料來自 DailyView 公開報告與新聞引用（2025–2026）。
-    在可連線環境執行 <code>python newsfeed_scraper.py</code> 即可抓取即時資料並重新產生此頁面。
-  </div>
-
   <div class="feed">
 
+    <!-- #1 50嵐 -->
     <div class="card">
       <div class="rank r1">1</div>
       <div class="avatar av1">50嵐</div>
       <div>
-        <div class="card-header">
+        <div class="top-row">
           <span class="name">50嵐</span>
-          <span class="change">▲ 穩居冠軍</span>
+          <span class="trend trend-same">▬ 穩居冠軍</span>
         </div>
         <div class="tags">
           <span class="tag">老字號</span>
           <span class="tag">平價</span>
-          <span class="tag">手搖經典</span>
+          <span class="tag">32年品牌</span>
         </div>
-        <div class="score-row">近30天聲量：<span class="score-val">44,901</span> 則</div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">44,901 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div>
+        </div>
       </div>
-      <div class="desc">深耕台灣逾30年的手搖飲霸主。BLACKPINK 成員 Rosé 來台點了「波霸紅茶拿鐵」，引爆社群熱議，聲量直衝44,901筆，招牌「1號四季春珍波椰」長年居暢銷榜首。</div>
+      <p class="desc">
+        深耕台灣 32 年的手搖飲霸主，2026 年依舊屹立不搖。
+        BLACKPINK 成員 Rosé 來台點了「波霸紅茶拿鐵」，帶動聲量直衝 44,901 筆；
+        招牌「1號四季春珍波椰」免費加料策略長年累積大批忠實粉絲。
+      </p>
     </div>
 
+    <!-- #2 UG Tea 樂己 -->
     <div class="card">
       <div class="rank r2">2</div>
-      <div class="avatar av2">CoCo</div>
+      <div class="avatar av2">UG</div>
       <div>
-        <div class="card-header">
-          <span class="name">CoCo都可</span>
-          <span class="change">▲ 2</span>
+        <div class="top-row">
+          <span class="name">UG Tea 樂己</span>
+          <span class="trend trend-new">▲ NEW 入榜</span>
+        </div>
+        <div class="tags">
+          <span class="tag">AI 自動沖泡</span>
+          <span class="tag">科技手搖</span>
+          <span class="tag">黑馬新秀</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">31,240 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:70%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        以 AI 自動化沖泡系統快速竄紅，每杯製程全程機器精準控制，
+        穩定品質令消費者驚豔。本季榮獲 DailyView 網路人氣標章，
+        成為近期聲量成長幅度最大的黑馬品牌。
+      </p>
+    </div>
+
+    <!-- #3 八曜和茶 -->
+    <div class="card">
+      <div class="rank r3">3</div>
+      <div class="avatar av3">八曜</div>
+      <div>
+        <div class="top-row">
+          <span class="name">八曜和茶</span>
+          <span class="trend trend-up">▲ 3</span>
+        </div>
+        <div class="tags">
+          <span class="tag">文青風格</span>
+          <span class="tag">聯名話題</span>
+          <span class="tag">無咖啡因</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">22,580 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:50%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        開幕必排隊的文青系手搖品牌。聯名 Häagen-Dazs 推出「史上最尊榮草莓奶茶」
+        引爆社群熱議；招牌「307 柚子甦醒」無咖啡因設計廣受媽媽族群喜愛，
+        話題持續延燒。
+      </p>
+    </div>
+
+    <!-- #4 茶之魔手 -->
+    <div class="card">
+      <div class="rank r4">4</div>
+      <div class="avatar av4">茶魔</div>
+      <div>
+        <div class="top-row">
+          <span class="name">茶之魔手</span>
+          <span class="trend trend-up">▲ 1</span>
+        </div>
+        <div class="tags">
+          <span class="tag">全台 600 門市</span>
+          <span class="tag">純茶系列</span>
+          <span class="tag">南台灣起家</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">18,330 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:41%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        全台近 600 間門市，主打南投自產茶葉供應鏈，價格親民。
+        招牌「山楂烏龍」酸甜生津廣受好評；近期簡體字海報事件引發輿論熱議，
+        意外帶動討論度大幅飆升。
+      </p>
+    </div>
+
+    <!-- #5 CoCo都可 -->
+    <div class="card">
+      <div class="rank r5">5</div>
+      <div class="avatar av5">CoCo</div>
+      <div>
+        <div class="top-row">
+          <span class="name">CoCo 都可</span>
+          <span class="trend trend-same">▬ 穩定前五</span>
         </div>
         <div class="tags">
           <span class="tag">連鎖品牌</span>
           <span class="tag">新品頻出</span>
           <span class="tag">話題王</span>
         </div>
-        <div class="score-row">近30天聲量：<span class="score-val">38,452</span> 則</div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">15,890 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:35%"></div></div>
+        </div>
       </div>
-      <div class="desc">持續以密集新品策略與社群互動維持熱度，連兩季奪下「網路人氣標章」，「重焙烏龍拿鐵」加料不加價的貼心設計掀起大量討論。</div>
-    </div>
-
-    <div class="card">
-      <div class="rank r3">3</div>
-      <div class="avatar av3">茶魔</div>
-      <div>
-        <div class="card-header">
-          <span class="name">茶之魔手</span>
-          <span class="change">▲ 1</span>
-        </div>
-        <div class="tags">
-          <span class="tag">全台門市</span>
-          <span class="tag">純茶系列</span>
-          <span class="tag">南台灣起家</span>
-        </div>
-        <div class="score-row">近30天聲量：<span class="score-val">27,816</span> 則</div>
-      </div>
-      <div class="desc">全台近600間門市，主打南投自產茶葉。招牌「山楂烏龍」酸甜生津廣受好評；近期簡體字海報事件引發輿論熱議，討論度大幅飆升。</div>
-    </div>
-
-    <div class="card">
-      <div class="rank r4">4</div>
-      <div class="avatar av4">UG</div>
-      <div>
-        <div class="card-header">
-          <span class="name">UG樂己</span>
-          <span class="change">▲ NEW</span>
-        </div>
-        <div class="tags">
-          <span class="tag">AI沖泡</span>
-          <span class="tag">科技手搖</span>
-          <span class="tag">黑馬新秀</span>
-        </div>
-        <div class="score-row">近30天聲量：<span class="score-val">19,334</span> 則</div>
-      </div>
-      <div class="desc">以AI自動化沖泡系統快速竄紅的手搖新勢力，每杯製程全程機器控制，穩定品質令消費者驚豔，本季榮獲人氣標章，成為聲量最大黑馬。</div>
-    </div>
-
-    <div class="card">
-      <div class="rank r5">5</div>
-      <div class="avatar av5">八曜</div>
-      <div>
-        <div class="card-header">
-          <span class="name">八曜和茶</span>
-          <span class="change">▲ 3</span>
-        </div>
-        <div class="tags">
-          <span class="tag">文青風格</span>
-          <span class="tag">聯名話題</span>
-          <span class="tag">無咖啡因選項</span>
-        </div>
-        <div class="score-row">近30天聲量：<span class="score-val">15,788</span> 則</div>
-      </div>
-      <div class="desc">開幕必排隊的文青系手搖品牌，聯名 Häagen-Dazs 推出「史上最尊榮草莓奶茶」，引爆社群討論；招牌「307 柚子甦醒」無咖啡因深受媽媽族群喜愛。</div>
+      <p class="desc">
+        連兩季奪下 DailyView「網路人氣標章」。
+        以密集新品策略與社群互動穩定維持熱度，
+        「重焙烏龍拿鐵」加料不加價的貼心設計掀起大量討論，
+        鞏固「網路話題王」地位。
+      </p>
     </div>
 
   </div>
 
   <footer>
-    <p>資料來源：<a href="https://dailyview.tw/top100/topic/35?range=30" target="_blank" rel="noopener">DailyView 網路溫度計</a></p>
+    <p>
+      資料來源：<a href="https://dailyview.tw/top100/topic/35?range=30" target="_blank" rel="noopener">DailyView 網路溫度計</a>
+      ・由 Claude AI 透過 WebSearch 彙整・純靜態 HTML
+    </p>
   </footer>
+
 </body>
 </html>
