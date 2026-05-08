@@ -14,11 +14,8 @@
       padding: 2rem 1rem 3rem;
     }
 
-    /* ── header ── */
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
+    /* header */
+    header { text-align: center; margin-bottom: 2rem; }
     .site-label {
       display: inline-block;
       font-size: 0.72rem;
@@ -33,33 +30,31 @@
       color: #b71c1c;
       line-height: 1.2;
     }
-    header h1 span {
-      color: #333;
-      font-weight: 400;
-      font-size: 1.1rem;
-    }
-    .meta-bar {
-      margin-top: 0.6rem;
-      font-size: 0.82rem;
-      color: #777;
-    }
+    header h1 span { color: #333; font-weight: 400; font-size: 1.1rem; }
+    .meta-bar { margin-top: 0.6rem; font-size: 0.82rem; color: #777; }
     .meta-bar a { color: #b71c1c; text-decoration: none; }
     .meta-bar a:hover { text-decoration: underline; }
 
-    /* ── demo banner ── */
+    /* demo banner */
     .demo-banner {
       max-width: 720px;
       margin: 0 auto 1.5rem;
-      padding: 0.6rem 1rem;
+      padding: 0.65rem 1rem;
       background: #fff8e1;
       border-left: 4px solid #f9a825;
       border-radius: 4px;
       font-size: 0.82rem;
       color: #6d4c0a;
-      display: block;
+      line-height: 1.6;
+    }
+    .demo-banner code {
+      background: #fef3cd;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
     }
 
-    /* ── feed ── */
+    /* feed */
     .feed {
       max-width: 720px;
       margin: 0 auto;
@@ -68,7 +63,7 @@
       gap: 1.1rem;
     }
 
-    /* ── card ── */
+    /* card */
     .card {
       background: #fff;
       border-radius: 14px;
@@ -97,59 +92,44 @@
       justify-content: center;
       font-size: 1.25rem;
       font-weight: 800;
-      color: #fff;
       flex-shrink: 0;
     }
     .r1 { background: linear-gradient(135deg,#f9d423,#f76b1c); color: #3e2000; }
     .r2 { background: linear-gradient(135deg,#cfd9df,#e2ebf0); color: #444; }
-    .r3 { background: linear-gradient(135deg,#e67e22,#d35400); }
-    .rx { background: linear-gradient(135deg,#2980b9,#1a5276); }
+    .r3 { background: linear-gradient(135deg,#e67e22,#d35400); color: #fff; }
+    .r4 { background: linear-gradient(135deg,#2980b9,#1a5276); color: #fff; }
+    .r5 { background: linear-gradient(135deg,#27ae60,#1e8449); color: #fff; }
 
-    /* thumbnail */
-    .thumb-wrap {
+    /* brand avatar */
+    .avatar {
       grid-row: 1 / 3;
       align-self: center;
       width: 80px;
       height: 80px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: linear-gradient(135deg,#fdecea,#fce4ec);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
       flex-shrink: 0;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
-    .thumb-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .av1 { background: linear-gradient(135deg,#fff3cd,#ffe082); color: #7d4e00; font-size: 1.45rem; }
+    .av2 { background: linear-gradient(135deg,#e3f2fd,#bbdefb); color: #0d47a1; font-size: 1.1rem; }
+    .av3 { background: linear-gradient(135deg,#e8f5e9,#c8e6c9); color: #1b5e20; font-size: 1.4rem; }
+    .av4 { background: linear-gradient(135deg,#ede7f6,#d1c4e9); color: #311b92; font-size: 1.1rem; }
+    .av5 { background: linear-gradient(135deg,#e0f7fa,#b2ebf2); color: #006064; font-size: 1.4rem; }
 
-    /* text area */
+    /* card text */
     .card-header {
       display: flex;
       align-items: baseline;
       gap: 0.6rem;
       flex-wrap: wrap;
     }
-    .name {
-      font-size: 1.08rem;
-      font-weight: 700;
-      color: #111;
-    }
-    .change {
-      font-size: 0.75rem;
-      color: #27ae60;
-      font-weight: 600;
-    }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-top: 0.35rem;
-    }
+    .name { font-size: 1.08rem; font-weight: 700; color: #111; }
+    .change { font-size: 0.75rem; color: #27ae60; font-weight: 600; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.35rem; }
     .tag {
       font-size: 0.7rem;
       padding: 0.15rem 0.55rem;
@@ -158,15 +138,8 @@
       border-radius: 999px;
       border: 1px solid #f5b7b1;
     }
-    .score-row {
-      margin-top: 0.45rem;
-      font-size: 0.82rem;
-      color: #555;
-    }
-    .score-val {
-      font-weight: 700;
-      color: #b71c1c;
-    }
+    .score-row { margin-top: 0.45rem; font-size: 0.82rem; color: #555; }
+    .score-val { font-weight: 700; color: #b71c1c; }
     .desc {
       grid-column: 3;
       margin-top: 0.5rem;
@@ -175,14 +148,16 @@
       line-height: 1.6;
     }
 
-    /* ── footer ── */
-    footer {
-      text-align: center;
-      margin-top: 2.5rem;
-      font-size: 0.78rem;
-      color: #aaa;
-    }
+    /* footer */
+    footer { text-align: center; margin-top: 2.5rem; font-size: 0.78rem; color: #aaa; }
     footer a { color: #aaa; }
+
+    @media (max-width: 480px) {
+      .card { grid-template-columns: 2.6rem 64px 1fr; gap: 0 0.75rem; padding: 0.85rem 1rem; }
+      .avatar { width: 64px; height: 64px; }
+      .rank { width: 2.6rem; height: 2.6rem; font-size: 1.05rem; }
+      .desc { grid-column: 1 / -1; margin-top: 0.75rem; }
+    }
   </style>
 </head>
 <body>
@@ -190,83 +165,109 @@
     <div class="site-label">DailyView 網路溫度計 ・ 口碑聲量排行</div>
     <h1>手搖飲料 Top 5 <span>近 30 天</span></h1>
     <div class="meta-bar">
-      資料來源：<a href="https://dailyview.tw/top100/topic/35?range=30" target="_blank" rel="noopener">https://dailyview.tw/top100/topic/35?range=30</a>
-      &nbsp;｜&nbsp; 產出時間：2026-05-08 17:31
+      資料來源：<a href="https://dailyview.tw/top100/topic/35?range=30" target="_blank" rel="noopener">dailyview.tw/top100/topic/35</a>
+      &nbsp;｜&nbsp; 更新時間：2026-05-08
     </div>
   </header>
 
   <div class="demo-banner">
-    ⚠️ 此為示範資料（Demo）：腳本執行環境無法連線至 dailyview.tw，
+    ⚠️ <strong>示範資料（Demo）</strong>：腳本執行環境無法直連 dailyview.tw，
     以下排名資料來自 DailyView 公開報告與新聞引用（2025–2026）。
-    在可連線環境執行 <code>python newsfeed_scraper.py</code> 即可抓取即時資料。
+    在可連線環境執行 <code>python newsfeed_scraper.py</code> 即可抓取即時資料並重新產生此頁面。
   </div>
 
   <div class="feed">
+
     <div class="card">
       <div class="rank r1">1</div>
-      <div class="thumb-wrap"><img src="https://dailyview.tw/images/brand/50lan.jpg" alt="50嵐" loading="lazy" onerror="this.style.display='none'" /></div>
+      <div class="avatar av1">50嵐</div>
       <div>
         <div class="card-header">
           <span class="name">50嵐</span>
           <span class="change">▲ 穩居冠軍</span>
         </div>
-        <div class="tags"><span class="tag">老字號</span><span class="tag">平價</span><span class="tag">手搖經典</span></div>
+        <div class="tags">
+          <span class="tag">老字號</span>
+          <span class="tag">平價</span>
+          <span class="tag">手搖經典</span>
+        </div>
         <div class="score-row">近30天聲量：<span class="score-val">44,901</span> 則</div>
       </div>
       <div class="desc">深耕台灣逾30年的手搖飲霸主。BLACKPINK 成員 Rosé 來台點了「波霸紅茶拿鐵」，引爆社群熱議，聲量直衝44,901筆，招牌「1號四季春珍波椰」長年居暢銷榜首。</div>
     </div>
+
     <div class="card">
       <div class="rank r2">2</div>
-      <div class="thumb-wrap"><img src="https://dailyview.tw/images/brand/coco.jpg" alt="CoCo都可" loading="lazy" onerror="this.style.display='none'" /></div>
+      <div class="avatar av2">CoCo</div>
       <div>
         <div class="card-header">
           <span class="name">CoCo都可</span>
           <span class="change">▲ 2</span>
         </div>
-        <div class="tags"><span class="tag">連鎖品牌</span><span class="tag">新品頻出</span><span class="tag">話題王</span></div>
+        <div class="tags">
+          <span class="tag">連鎖品牌</span>
+          <span class="tag">新品頻出</span>
+          <span class="tag">話題王</span>
+        </div>
         <div class="score-row">近30天聲量：<span class="score-val">38,452</span> 則</div>
       </div>
       <div class="desc">持續以密集新品策略與社群互動維持熱度，連兩季奪下「網路人氣標章」，「重焙烏龍拿鐵」加料不加價的貼心設計掀起大量討論。</div>
     </div>
+
     <div class="card">
       <div class="rank r3">3</div>
-      <div class="thumb-wrap"><img src="https://dailyview.tw/images/brand/teamagichand.jpg" alt="茶之魔手" loading="lazy" onerror="this.style.display='none'" /></div>
+      <div class="avatar av3">茶魔</div>
       <div>
         <div class="card-header">
           <span class="name">茶之魔手</span>
           <span class="change">▲ 1</span>
         </div>
-        <div class="tags"><span class="tag">全台門市</span><span class="tag">純茶系列</span><span class="tag">南台灣起家</span></div>
+        <div class="tags">
+          <span class="tag">全台門市</span>
+          <span class="tag">純茶系列</span>
+          <span class="tag">南台灣起家</span>
+        </div>
         <div class="score-row">近30天聲量：<span class="score-val">27,816</span> 則</div>
       </div>
       <div class="desc">全台近600間門市，主打南投自產茶葉。招牌「山楂烏龍」酸甜生津廣受好評；近期簡體字海報事件引發輿論熱議，討論度大幅飆升。</div>
     </div>
+
     <div class="card">
-      <div class="rank rx">4</div>
-      <div class="thumb-wrap"><img src="https://dailyview.tw/images/brand/ugloji.jpg" alt="UG樂己" loading="lazy" onerror="this.style.display='none'" /></div>
+      <div class="rank r4">4</div>
+      <div class="avatar av4">UG</div>
       <div>
         <div class="card-header">
           <span class="name">UG樂己</span>
           <span class="change">▲ NEW</span>
         </div>
-        <div class="tags"><span class="tag">AI沖泡</span><span class="tag">科技手搖</span><span class="tag">黑馬新秀</span></div>
+        <div class="tags">
+          <span class="tag">AI沖泡</span>
+          <span class="tag">科技手搖</span>
+          <span class="tag">黑馬新秀</span>
+        </div>
         <div class="score-row">近30天聲量：<span class="score-val">19,334</span> 則</div>
       </div>
       <div class="desc">以AI自動化沖泡系統快速竄紅的手搖新勢力，每杯製程全程機器控制，穩定品質令消費者驚豔，本季榮獲人氣標章，成為聲量最大黑馬。</div>
     </div>
+
     <div class="card">
-      <div class="rank rx">5</div>
-      <div class="thumb-wrap"><img src="https://dailyview.tw/images/brand/bayao.jpg" alt="八曜和茶" loading="lazy" onerror="this.style.display='none'" /></div>
+      <div class="rank r5">5</div>
+      <div class="avatar av5">八曜</div>
       <div>
         <div class="card-header">
           <span class="name">八曜和茶</span>
           <span class="change">▲ 3</span>
         </div>
-        <div class="tags"><span class="tag">文青風格</span><span class="tag">聯名話題</span><span class="tag">無咖啡因選項</span></div>
+        <div class="tags">
+          <span class="tag">文青風格</span>
+          <span class="tag">聯名話題</span>
+          <span class="tag">無咖啡因選項</span>
+        </div>
         <div class="score-row">近30天聲量：<span class="score-val">15,788</span> 則</div>
       </div>
       <div class="desc">開幕必排隊的文青系手搖品牌，聯名 Häagen-Dazs 推出「史上最尊榮草莓奶茶」，引爆社群討論；招牌「307 柚子甦醒」無咖啡因深受媽媽族群喜愛。</div>
     </div>
+
   </div>
 
   <footer>
