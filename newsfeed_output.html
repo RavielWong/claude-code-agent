@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>手搖飲料 Top 5｜DailyView 網路溫度計 口碑聲量排行</title>
+  <title>手搖飲料 Top 5｜每日口碑聲量排行</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -11,7 +11,6 @@
       --red:    #c0392b;
       --red-lt: #fdecea;
       --red-bd: #f5b7b1;
-      --gold:   #f39c12;
       --bg:     #f2f2f0;
       --card:   #ffffff;
       --text:   #1a1a1a;
@@ -30,47 +29,18 @@
     /* ── Header ── */
     header { text-align: center; margin-bottom: 2rem; }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 0.6rem;
-    }
-    .eyebrow::before,
-    .eyebrow::after { content: ''; flex: 1; height: 1px; background: #ddd; width: 2rem; }
-
     h1 {
       font-size: 2rem;
       font-weight: 900;
       color: var(--red);
       letter-spacing: -0.02em;
     }
-    h1 em {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 1rem;
-      color: #555;
-      margin-left: 0.4rem;
-    }
 
-    .meta {
-      margin-top: 0.6rem;
-      font-size: 0.78rem;
-      color: #999;
-    }
-    .meta a { color: var(--red); text-decoration: none; }
-    .meta a:hover { text-decoration: underline; }
-
-    /* ── Source badge ── */
     .source-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      margin: 1.2rem auto 0;
+      margin: 1rem auto 0;
       padding: 0.35rem 0.9rem;
       background: #fff;
       border: 1px solid #e0e0e0;
@@ -90,10 +60,42 @@
       50%      { opacity: .35; }
     }
 
+    /* ── Date divider ── */
+    .date-divider {
+      max-width: 700px;
+      margin: 2.5rem auto 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .date-divider::before,
+    .date-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+    .date-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      white-space: nowrap;
+      padding: 0.25rem 0.8rem;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+    .date-divider.latest .date-label {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+    }
+
     /* ── Feed ── */
     .feed {
       max-width: 700px;
-      margin: 2rem auto 0;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -109,18 +111,14 @@
       grid-template-columns: 2.8rem 76px 1fr;
       grid-template-rows: auto auto;
       column-gap: 1rem;
-      row-gap: 0;
       align-items: start;
       transition: transform .15s, box-shadow .15s;
-      text-decoration: none;
-      color: inherit;
     }
     .card:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(0,0,0,.1);
     }
 
-    /* rank */
     .rank {
       grid-row: 1 / 3;
       align-self: center;
@@ -139,7 +137,6 @@
     .r4 { background: linear-gradient(135deg,#5dade2,#1a5276); color: #fff; }
     .r5 { background: linear-gradient(135deg,#58d68d,#1e8449); color: #fff; }
 
-    /* avatar */
     .avatar {
       grid-row: 1 / 3;
       align-self: center;
@@ -150,17 +147,19 @@
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1rem;
       letter-spacing: -0.02em;
       flex-shrink: 0;
     }
-    .av1 { background: linear-gradient(150deg,#fff9e6,#ffd97d); color: #6b4400; font-size: 1.4rem; }
-    .av2 { background: linear-gradient(150deg,#e8f5ff,#90caf9); color: #0d47a1; font-size: 0.95rem; }
-    .av3 { background: linear-gradient(150deg,#fdf3e7,#f5cba7); color: #784212; font-size: 1.35rem; }
-    .av4 { background: linear-gradient(150deg,#f0eaff,#c39bd3); color: #4a235a; font-size: 0.9rem; }
-    .av5 { background: linear-gradient(150deg,#eafaf1,#a9dfbf); color: #145a32; font-size: 0.9rem; }
+    .av1  { background: linear-gradient(150deg,#fff9e6,#ffd97d); color: #6b4400; font-size: 1.4rem; }
+    .av2  { background: linear-gradient(150deg,#e8f5ff,#90caf9); color: #0d47a1; font-size: 0.9rem; }
+    .av3  { background: linear-gradient(150deg,#f9ebff,#ce93d8); color: #4a148c; font-size: 0.95rem; }
+    .av4  { background: linear-gradient(150deg,#fdf3e7,#f5cba7); color: #784212; font-size: 1.1rem; }
+    .av5  { background: linear-gradient(150deg,#e8f8f5,#a2d9ce); color: #0e6655; font-size: 1rem; }
+    .av2b { background: linear-gradient(150deg,#e8f5ff,#90caf9); color: #0d47a1; font-size: 0.95rem; }
+    .av3b { background: linear-gradient(150deg,#fdf3e7,#f5cba7); color: #784212; font-size: 1.35rem; }
+    .av4b { background: linear-gradient(150deg,#f0eaff,#c39bd3); color: #4a235a; font-size: 0.9rem; }
+    .av5b { background: linear-gradient(150deg,#eafaf1,#a9dfbf); color: #145a32; font-size: 0.9rem; }
 
-    /* top row */
     .top-row {
       display: flex;
       align-items: baseline;
@@ -177,8 +176,8 @@
     .trend-up   { background: #eafaf1; color: #1e8449; }
     .trend-new  { background: #eaf4fb; color: #1a5276; }
     .trend-same { background: #f2f3f4; color: #616a6b; }
+    .trend-down { background: #fef9e7; color: #9a7d0a; }
 
-    /* tags */
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -194,7 +193,6 @@
       border-radius: 999px;
     }
 
-    /* score */
     .score-bar {
       margin-top: 0.4rem;
       display: flex;
@@ -206,7 +204,6 @@
     .bar-wrap    { flex: 1; height: 5px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
     .bar-fill    { height: 100%; border-radius: 3px; background: linear-gradient(90deg,#e74c3c,#f39c12); }
 
-    /* desc */
     .desc {
       grid-column: 3;
       margin-top: 0.55rem;
@@ -215,16 +212,8 @@
       line-height: 1.65;
     }
 
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      font-size: 0.74rem;
-      color: #bbb;
-    }
-    footer a { color: #bbb; }
+    footer { text-align: center; margin-top: 3rem; font-size: 0.74rem; color: #bbb; }
 
-    /* ── Responsive ── */
     @media (max-width: 500px) {
       h1 { font-size: 1.55rem; }
       .card {
@@ -242,19 +231,160 @@
 
   <header>
     <h1>手搖飲料 Top 5</h1>
-    <p class="meta">
-      資料來源：<a href="https://dailyview.tw/top100/topic/35?range=30" target="_blank" rel="noopener">dailyview.tw/top100/topic/35</a>
-      &nbsp;｜&nbsp;更新：2026-05-08
-    </p>
     <div class="source-badge">
       <span class="dot"></span>
       由 Claude AI 透過網路搜尋彙整・純 HTML 靜態頁面
     </div>
   </header>
 
+  <!-- ══════════════════════════════════
+       2026/05/11
+  ══════════════════════════════════ -->
+  <div class="date-divider latest">
+    <span class="date-label">2026 / 05 / 11</span>
+  </div>
   <div class="feed">
 
-    <!-- #1 50嵐 -->
+    <div class="card">
+      <div class="rank r1">1</div>
+      <div class="avatar av1">50嵐</div>
+      <div>
+        <div class="top-row">
+          <span class="name">50嵐</span>
+          <span class="trend trend-same">▬ 穩居冠軍</span>
+        </div>
+        <div class="tags">
+          <span class="tag">老字號</span>
+          <span class="tag">平價</span>
+          <span class="tag">32年品牌</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">46,213 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        連假效應加持，五月聲量持續攀升。
+        全台門市「買五送一」優惠配合母親節檔期，
+        社群分享量顯著增加，招牌「1號四季春珍波椰」穩居暢銷榜首。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="rank r2">2</div>
+      <div class="avatar av2">CoCo</div>
+      <div>
+        <div class="top-row">
+          <span class="name">CoCo 都可</span>
+          <span class="trend trend-up">▲ 3</span>
+        </div>
+        <div class="tags">
+          <span class="tag">聯名話題</span>
+          <span class="tag">美樂蒂</span>
+          <span class="tag">新品頻出</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">38,901 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:84%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        × 美樂蒂夢幻聯名限定杯套席捲社群，
+        粉色系飲品圖片在 IG、Threads 瘋傳，
+        帶動五月聲量大幅躍升，一舉超越 UG Tea 搶下第二名。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="rank r3">3</div>
+      <div class="avatar av3">先喝道</div>
+      <div>
+        <div class="top-row">
+          <span class="name">先喝道 TAO TAO TEA</span>
+          <span class="trend trend-new">▲ NEW</span>
+        </div>
+        <div class="tags">
+          <span class="tag">精品茶</span>
+          <span class="tag">35年製茶</span>
+          <span class="tag">負評僅 1%</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">29,447 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:64%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        DailyView 4/3–5/2 調查中「聲量穩居前五」的精品手搖新勢力。
+        隸屬古典玫瑰園集團，擁有 35 年製茶經驗，
+        負面評價僅約 1%，被 AI 數據分析列為精品手搖第一品牌。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="rank r4">4</div>
+      <div class="avatar av4">麻古</div>
+      <div>
+        <div class="top-row">
+          <span class="name">麻古茶坊 MACU TEA</span>
+          <span class="trend trend-up">▲ NEW</span>
+        </div>
+        <div class="tags">
+          <span class="tag">芝芝系列</span>
+          <span class="tag">鮮果果粒</span>
+          <span class="tag">夏季必喝</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">21,088 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:46%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        夏季來臨，「楊枝甘露 2.0」與「芝芝葡萄果粒」搜尋量急速攀升。
+        模糊飲品與甜點界線的創意路線廣受好評，
+        五月份討論熱度顯著回升，重返前五名。
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="rank r5">5</div>
+      <div class="avatar av5">一沐日</div>
+      <div>
+        <div class="top-row">
+          <span class="name">一沐日</span>
+          <span class="trend trend-up">▲ NEW</span>
+        </div>
+        <div class="tags">
+          <span class="tag">台式配料</span>
+          <span class="tag">逮丸奶茶</span>
+          <span class="tag">台中起家</span>
+        </div>
+        <div class="score-bar">
+          <span class="score-label">聲量</span>
+          <span class="score-num">16,320 則</span>
+          <div class="bar-wrap"><div class="bar-fill" style="width:35%"></div></div>
+        </div>
+      </div>
+      <p class="desc">
+        以「逮丸奶茶」將草仔粿化身彈牙珍珠的台式創意手搖，
+        母親節前後傳統台味話題引發大量回響，
+        被網友讚為「最有台灣魂的手搖飲」，首度打入前五名。
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════
+       2026/05/08
+  ══════════════════════════════════ -->
+  <div class="date-divider">
+    <span class="date-label">2026 / 05 / 08</span>
+  </div>
+  <div class="feed">
+
     <div class="card">
       <div class="rank r1">1</div>
       <div class="avatar av1">50嵐</div>
@@ -281,10 +411,9 @@
       </p>
     </div>
 
-    <!-- #2 UG Tea 樂己 -->
     <div class="card">
       <div class="rank r2">2</div>
-      <div class="avatar av2">UG</div>
+      <div class="avatar av2b">UG</div>
       <div>
         <div class="top-row">
           <span class="name">UG Tea 樂己</span>
@@ -308,10 +437,9 @@
       </p>
     </div>
 
-    <!-- #3 八曜和茶 -->
     <div class="card">
       <div class="rank r3">3</div>
-      <div class="avatar av3">八曜</div>
+      <div class="avatar av3b">八曜</div>
       <div>
         <div class="top-row">
           <span class="name">八曜和茶</span>
@@ -335,10 +463,9 @@
       </p>
     </div>
 
-    <!-- #4 茶之魔手 -->
     <div class="card">
       <div class="rank r4">4</div>
-      <div class="avatar av4">茶魔</div>
+      <div class="avatar av4b">茶魔</div>
       <div>
         <div class="top-row">
           <span class="name">茶之魔手</span>
@@ -362,10 +489,9 @@
       </p>
     </div>
 
-    <!-- #5 CoCo都可 -->
     <div class="card">
       <div class="rank r5">5</div>
-      <div class="avatar av5">CoCo</div>
+      <div class="avatar av5b">CoCo</div>
       <div>
         <div class="top-row">
           <span class="name">CoCo 都可</span>
