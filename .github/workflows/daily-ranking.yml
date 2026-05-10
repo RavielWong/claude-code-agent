@@ -1,0 +1,69 @@
+name: 每日手搖飲料排名
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 08:00 台灣時間 (UTC+8)
+  workflow_dispatch:      # 允許手動觸發
+
+permissions:
+  contents: write
+
+jobs:
+  daily-ranking:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/newsfeed-webpage-scraper-IENPA
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "claude-code[bot]"
+          git config user.email "claude-code[bot]@users.noreply.github.com"
+
+      - uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            今天的日期請從系統時間取得（台灣時間 UTC+8，執行 `date -u -d '+8 hours' +%Y-%m-%d` 即可）。
+
+            請按照以下步驟執行每日手搖飲料排名更新：
+
+            1. **WebSearch** 搜尋「台灣手搖飲料品牌 網路聲量 排名 今日」等關鍵字，
+               找出前 5 名品牌，整理每個品牌的：
+               - 估算網路聲量數字（score）
+               - 排名異動（up / down / same / new）
+               - 趨勢標籤（trend_label）
+               - 3 個品牌熱門標籤（tags）
+               - 50 字以內的品牌簡介（desc）
+
+            2. **建立 data/YYYY-MM-DD.json**（依今日日期命名），
+               格式完全依照 data/ 資料夾內現有 JSON 範例。
+
+            3. **更新 index.html**：
+               a. 將目前最上方的 `<div class="date-divider latest">` 改為 `<div class="date-divider">`
+               b. 在 `</header>` 之後、原本第一個 date-divider 之前，插入新的今日日期區塊：
+                  ```html
+                  <!-- ══════════════════════════════════
+                       YYYY/MM/DD
+                  ══════════════════════════════════ -->
+                  <div class="date-divider latest">
+                    <span class="date-label">YYYY / MM / DD</span>
+                  </div>
+                  <div class="feed">
+                    <!-- 5 張 card，使用 av1–av5 avatar class -->
+                  </div>
+                  ```
+               c. 每張 card 的聲量條寬度（style="width:XX%"）= 該品牌 score ÷ 第 1 名 score × 100，
+                  第 1 名固定 100%。
+               d. trend class 對應：up → trend-up、down → trend-down、same → trend-same、new → trend-new
+
+            4. **Git commit & push**：
+               ```bash
+               git add data/YYYY-MM-DD.json index.html
+               git commit -m "Daily ranking YYYY-MM-DD"
+               git push origin claude/newsfeed-webpage-scraper-IENPA
+               ```
